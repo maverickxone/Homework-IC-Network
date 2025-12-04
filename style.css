@@ -1,0 +1,476 @@
+/* 页面背景渐变 - 去除 flex-direction: column 和 justify-content，改为默认布局，让内容自然流动 */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #88e4f7, #FFFFFF); /* 蓝色到白色渐变 */
+    color: #333;
+    margin: 0;
+    padding: 0，10px;
+    min-height: 100vh; /* 改为 min-height，避免内容少时背景不填满 */
+}
+
+/* header 区域：左侧是标题，右侧是图片 - 不再占满整个视口高度，让它自然高度，垂直居中内容 */
+header {
+    display: flex;
+    justify-content: flex-start; /* 左右两部分分布 */
+    align-items: center; /* 垂直居中对齐 */
+    padding: 23vh 5% 23vh 5%; /* 加大上下 padding，让 header 区域在页面中居中显示，同时留出空间 */
+    z-index: 100;
+    gap: 80px; /* 在左侧文字和右侧图片之间加间隙，进一步防止挤压 */
+    position: relative; /* 这里如果使用absolute则会将标题部分强制写在页面中央，导致与下方内容重叠 */
+}
+
+/* 标题区域样式：左侧 */
+header h1 {
+    font-size: 2.6em;
+    color: #333;
+    margin: 10px;
+}
+
+/* 副标题区域样式 */
+header p {
+    font-size: 16px;
+    color: #333;
+    flex-basis: 30%; /* 副标题宽度也设置为30% */
+    margin: 10px;
+}
+
+/* 标题右侧图片 */
+header img {
+    width: 50%; /* 图片占据右侧50%的宽度 */
+    object-fit: cover; /* 保持图片比例，填充区域 */
+    height: auto; /* 高度自适应 */
+    filter: brightness(0.9) contrast(1.2) saturate(1.1); /* 调整亮度、对比度、饱和度 */
+    border-radius: 12px; /* 给图片加圆角 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加柔和阴影 */
+    position: relative; /* 使用relative定位 */
+}
+
+/* 每个小节的样式 - 每个 section 都有自己的渐变背景，避免强行 margin-top */
+.section {
+    padding: 60px 20px; /* 给每个部分添加内边距 */
+    opacity: 0;         /* 初始时设置透明 */
+    transform: translateY(40px); /* 初始时偏移 */
+    transition: opacity 1.8s, transform 1.8s;
+    text-align: center;
+    background: linear-gradient(to bottom, #88e4f7, #FFFFFF); /* 每个 section 都有渐变背景 */
+    min-height: auto; /* 改为 auto，让每个 section 自然高度，只占实际内容大小，减少小结之间的大空白 */
+    display: flex; /* 让内容垂直居中 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#section2{
+  background: linear-gradient(to bottom, #ffffff, #9bf7da);
+}
+
+#section3{
+  background: linear-gradient(to bottom, #9bf7da, #ffffff);
+}
+
+#section4{
+  background: linear-gradient(to bottom, #ffffff, #fad075);
+}
+
+.section img {
+    width: 80%;  /* 设置图片最大宽度为80% */
+    max-width: 500px;  /* 最大宽度限制 */
+    margin-top: 20px;
+}
+
+/* 响应式调整 - 在小屏幕上减少 padding 和高度 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* 手机上文字在上，图片在下 */
+        padding: 60px 5%; /* 减少 padding */
+        gap: 40px; /* 缩小间隙 */
+    }
+
+    header h1 {
+        font-size: 2.5em; /* 缩小字体 */
+    }
+
+    header p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    header img {
+        width: 90%; /* 图片在手机上几乎占满 */
+    }
+
+    .section {
+        padding: 40px 10px; /* 手机上缩小 padding */
+        min-height: auto; /* 不再强制占满屏，让自然流动 */
+    }
+}
+
+/* 通用按钮样式 */
+button {
+    padding: 14px 30px;
+    font-size: 1.0em;
+    cursor: pointer;
+    border: none;
+    background-color: #f0a24a; /* 主橙色 */
+    color: white;
+    border-radius: 12px; /* 圆角大小，可调大一点更柔和 */
+    transition: 
+        background-color 0.25s ease,
+        transform 0.15s ease,
+        box-shadow 0.25s ease;
+    margin-top: 20px;
+
+    /* 初始阴影 */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+
+/* 悬停效果：颜色略深 + 阴影更柔和 */
+button:hover {
+    background-color: #e09134;
+    box-shadow: 0px 6px 14px rgba(0,0,0,0.2);
+}
+
+/* 点击效果：略微缩小 + 阴影变小，像真实按下按钮 */
+button:active {
+    transform: scale(0.98); /* 按压缩小 */
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.12);
+}
+
+/*---------------------------------------------------------------------------------------*/
+/* ===== Intro 页面标题区域 ===== */
+.intro-header {
+    padding: 80px 8% 40px 8%;
+    text-align: left;
+}
+
+.intro-header h1 {
+    font-size: 2.6em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.intro-header p {
+    font-size: 1.1em;
+    color: #444;
+    max-width: 750px;
+}
+
+
+/* ===== Intro 主体容器 ===== */
+.intro-content {
+    padding: 20px 8% 100px 8%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* ===== Intro 每个说明区块 ===== */
+.intro-section {
+    margin-bottom: 80px;
+}
+
+.intro-section h3 {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.intro-section p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+    max-width: 900px;
+}
+
+.intro-section ul {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.intro-section ul li {
+    font-size: 1.05em;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.intro-section ol {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* ===== 四格功能卡片 ===== */
+.intro-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.intro-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer; /* 鼠标悬浮时变为指针 */
+}
+
+.intro-card h3 {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.intro-card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.intro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0px 0px rgba(0,0,0,0.12);
+}
+
+.intro-card[title] {
+    position: relative;
+}
+
+/* 添加鼠标悬浮提示文字样式 */
+.intro-card[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.intro-card.disabled {
+    cursor: not-allowed; /* 禁止点击时的鼠标样式 */
+    opacity: 1; /* 禁用时半透明 */
+}
+
+/* 禁用状态下的 tooltip 样式 */
+.intro-card.disabled::after {
+    content: attr(title);
+    position: absolute;
+    top: -20px; /* 调整为靠近按钮的顶部 */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* 深色背景 */
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    visibility: hidden; /* 默认不显示 */
+}
+
+/* 禁用卡片悬浮时 */
+.intro-card.disabled:hover {
+    background: #ddd; /* 灰色背景 */
+    box-shadow: none; /* 移除阴影 */
+    opacity: 0.5; /* 半透明效果 */
+}
+
+/* 启用时显示工具提示 */
+.intro-card.disabled:hover::after {
+    visibility: visible; /* 悬浮时显示提示 */
+}
+
+.intro-image {
+    width: 100%;    /* 图片占满容器宽度 */
+    max-width: 500px; /* 限制最大宽度 */
+    margin: 20px 0;   /* 上下边距 */
+    display: block;  /* 使图片在块级元素中居中显示 */
+}
+
+/* 文字介绍样式，居中并允许文字显示宽度自适应 */
+.intro-description {
+    width: 100%;
+    max-width: 710px;  /* 最大宽度，确保内容不会太宽 */
+    margin: 0 auto;  /* 居中 */
+    text-align: center;
+    padding: 20px;
+}
+
+.intro-description p {
+    font-size: 1.0em;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 图表容器样式 */
+.chart-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#ivCurveChart {
+    width: 80%;  /* 图表宽度 */
+    height: 300px; /* 图表高度 */
+    margin: 10px auto;
+}
+
+/* 修改后的按钮容器（只改这几行） */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;     /* 新增：垂直居中对齐 */
+    gap: 16px;                /* 间距稍微小一点，更紧凑 */
+    margin-top: -14px;         /* 跟上面内容留点呼吸感 */
+    flex-wrap: wrap;         /* 手机上自动换行 */
+}
+
+/* 关键：让按钮变“小而美”，跟正文一样大 */
+.button-container button,
+.small-button,
+button {                     /* 三种写法都覆盖，防止漏掉 */
+    padding: 6px 16px !important;    /* 小内边距 */
+    font-size: 0.95rem !important;   /* 跟正文差不多大（可改 0.9rem 更小） */
+    height: auto !important;
+    min-height: unset !important;
+    border-radius: 8px !important;   /* 小圆角更精致 */
+    background: #f0a24a !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+}
+
+.button-container button:hover,
+.small-button:hover {
+    background: #e09134 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+}
+
+.button-container button:active,
+.small-button:active {
+    transform: translateY(0) !important;
+}
+
+.search-pure {
+    display: flex;
+    justify-content: center;
+    margin: 14px auto;
+    padding: 0 20px;
+}
+
+#voltageInput {
+    width: 320px;
+    max-width: 90%;
+    padding: 7px 24px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 3px solid #e2e8f0;
+    border-radius: 50px;
+    outline: none;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+#voltageInput:focus {
+    border-color: #f0a24a;
+    box-shadow: 0 0 0 6px rgba(240,162,74,0.2);
+    transform: scale(1.02);
+}
+
+/* 靠左对齐的 GitHub 卡片 */
+.github-card-left {
+    width: 340px;
+    height: 180px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    padding: 28px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin: 60px 0 60px 10%;          /* 关键：左边距 10%，整体靠左 */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.github-card-left:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+}
+
+/* 左上角 GitHub 图标 */
+.github-icon-top {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-size: 2.8rem;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.github-card-left:hover .github-icon-top {
+    color: #2a7448;
+}
+
+/* 文字内容整体靠左 */
+.github-content {
+    margin-left: 68px;     /* 留出图标空间 */
+    text-align: left;
+}
+
+.github-content h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px 0;
+}
+
+.github-content p {
+    margin: 8px 0;
+    color: #475569;
+    font-size: 1.02rem;
+    line-height: 1.4;
+}
+
+/* 点击跳转（不需要 JS） */
+.github-card-left {
+    cursor: pointer;
+}
+.github-card-left:active {
+    transform: translateY(-8px) scale(0.98);
+}
+
+/* 彩蛋 1：悬停时右边出现小箭头 */
+.github-card-left::after {
+    content: '→';
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.8rem;
+    color: #2a7448;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.github-card-left:hover::after {
+    opacity: 1;
+    right: 18px;                 /* 箭头往左飞一点 */
+}
+
+/* 彩蛋 2：Maverickxone 文字悬停变橙色（跟图标同步） */
+.github-content h3 {
+    transition: color 0.3s ease;  /* 加个平滑过渡 */
+    color: #1e293b;
+}
+
+.github-card-left:hover .github-content h3 {
+    color: #2a7448 !important;   /* 跟图标同色 */
+}

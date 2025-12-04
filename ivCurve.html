@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I-V 曲线分析</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- 引入放大镜图标 -->
+</head>
+
+<body>
+  
+    <header class="intro-header">
+        <h1>I-V 曲线分析</h1>
+        <p>
+            在此部分，我们将展示 I-V 曲线的数学理论和实际建模结果的对比，帮助分析材料的电学特性。
+        </p>
+    </header>
+
+    <!-- 文字介绍部分，居中且不限制宽度 -->
+    <div class="intro-description">
+        <p>通过对 I-V 曲线的数学分析和实际实验建模，探讨不同参数对材料性能的影响。我们将展示理论曲线与实际建模曲线之间的关系，以便理解如何优化半导体材料的性能。</p>
+    </div>
+
+    <!-- 图表部分 -->
+    <div class="chart-container">
+        <h2>I-V 曲线拟合</h2>
+        <canvas id="ivCurveChart" width="900" height="500"></canvas>
+    </div>
+
+    <section class="intro-section">
+
+    <!-- 按钮容器：用于展示曲线按钮 -->
+    <div class="button-container">
+        <button class="small-button" id="mathCurveBtn">数学上的理论曲线</button>
+        <button class="small-button" id="realCurveBtn">实际建模得到的曲线</button>
+        <button class="small-button" id="resetBtn">重置曲线</button> <!-- 新增重置按钮 -->
+    </div>
+    
+    <!-- 替换你原来的所有搜索相关代码 -->
+    <div class="search-pure">
+        <input 
+            type="number" 
+            id="voltageInput" 
+            placeholder="输入电压值（0~5V），按回车查询" 
+            min="0" 
+            max="5" 
+            step="0.01"
+            autocomplete="off">
+    </div>
+
+    </section>
+
+
+
+
+  <main class="intro-content">
+    <!-- 网站功能概览 -->
+    <section class="intro-section">
+        <h2>网站导航</h2>
+        <p>点击对应模块进入对应子网页！</p>
+
+        <div class="intro-grid">
+            <div class="intro-card" onclick="window.location.href='index.html';" title="返回首页">
+                <h3>首页</h3>
+                <p>返回网站的首页。</p>
+            </div>
+
+            <div class="intro-card" onclick="window.location.href='intro.html';" title="点击查看 实验总体介绍">
+                <h3>实验总体介绍</h3>
+                <p>当前页面，提供背景、目标和总体流程说明。</p>
+            </div>
+
+            <div class="intro-card" onclick="window.location.href='tcadProcess.html';" title="点击查看 TCAD 模型过程展示">
+                <h3>TCAD 模型过程展示</h3>
+                <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+            </div>
+
+            <div class="intro-card disabled" title="当前页面（不可点击）">
+                <h3>I-V 曲线参数</h3>
+                <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+            </div>
+
+            <div class="intro-card" onclick="window.location.href='network.html';" title="点击查看网络搭建思路">
+                <h3>网络搭建思路</h3>
+                <p>介绍了实验数据的收集和网站搭建过程。</p>
+            </div>
+        </div>
+    </section>
+  </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

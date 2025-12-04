@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网站搭建相关</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>网站搭建相关介绍</h1>
+        <p>本页面用于展示本次实验的网站搭建思路，结构和前后端处理</p>
+    </header>
+
+
+    <main class="intro-content">
+        <section class="intro-section">
+            <h2>01 基本建设</h2>
+            <ul>
+                <li>网站前端使用HTML,CSS和JavaScript开发，通过Live Server插件在VSCode中进行本地预览和调试。</li>
+                <li>在前端，Chart.js用于绘制I-V曲线，用户输入数据后，实时更新图表。</li>
+                <li>网站后端主要负责存储从TCAD中建模得到的实验数据，用户从前端输入时，系统从后端查找数据，在前端进行计算和绘图呈现</li>
+                <li>后端服务器采用阿里云提供的云服务器</li>
+            </ul>
+        </section>
+
+        <!-- 核心思路 -->
+        <section class="intro-section">
+            <h2>02 核心思路与流程</h2>
+            <p>
+                这里具体说明整个网站的架构和原理。
+            </p>
+            <ul>
+                <li>网站的所有文件（HTML、CSS、JavaScript、图片等）都存储在服务器上，服务器会提供一个网站域名供用户访问。</li>
+                <li>服务器负责托管网站的文件，当用户访问时，它会将这些文件发送到用户的浏览器。</li>
+                <li>当用户访问你的网站时，浏览器发送请求到服务器，服务器响应并返回页面文件。</li>
+                <li>如果不需要后端操作，你也可以直接放到Github Pages上托管，但只限于静态网页。</li>
+                <li></li>
+            </ul>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 Source Code</h2>
+            <ul>
+                <li>本网站的所有前端文件及代码均可在我的Github账号上找到</li>
+            </ul>
+            <div class="github-card-left" onclick="window.open('https://github.com/maverickxone', '_blank')">
+                <div class="github-icon-top">
+                     <i class="fab fa-github"></i>
+                </div>
+                <div class="github-content">
+                    <h3>Maverickxone的 GitHub</h3>
+                    <p>查看本项目完整源代码</p>
+                    <p>欢迎 Star & Follow</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 功能概览 -->
+        <section class="intro-section">
+            <h2>04 网站整体功能概览</h2>
+            <p>
+                本网站由五个主要模块组成，分别展示完整的实验内容与成果。<br>
+                点击对应模块进入对应子网页！
+            </p>
+            <div class="intro-grid">
+                <!-- 在功能卡片的开头添加首页按钮 -->
+                <div class="intro-card" onclick="window.location.href='index.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro.html';" title="点击查看 实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='tcadProcess.html';" title="点击查看 TCAD 模型过程展示">
+                    <h3>TCAD 模型过程展示</h3>
+                    <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='ivCurve.html';" title="点击查看 I-V 曲线参数">
+                    <h3>I-V 曲线参数</h3>
+                    <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TCAD建模过程展示 - 集成电路大作业</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>TCAD建模过程展示</h1>
+        <p>
+            本页面展示了从选择衬底，离子注入，退火，施加电压到最终得到 I-V 曲线的完整建模过程。
+        </p>
+    </header>
+
+    <main class="intro-content">
+        <!-- 步骤 1：选择衬底材料并定义结构 -->
+        <section class="intro-section">
+            <h2>01 选择衬底材料并定义结构</h2>
+            <p>
+                在 TCAD 中，建模的第一步是选择合适的衬底材料。通常使用硅（Si）作为衬底。接下来，定义衬底的尺寸、形状和电气特性。
+                衬底的选择和定义是后续建模过程中关键的一步。
+            </p>
+            <ul>
+                <li>选择衬底类型：如单晶硅或掺杂硅。</li>
+                <li>定义衬底的尺寸和厚度，设定材料的几何形状。</li>
+            </ul>
+            
+        </section>
+
+        <!-- 步骤 2：离子注入（掺杂） -->
+        <section class="intro-section">
+            <h2>02 离子注入（掺杂）</h2>
+            <p>
+                离子注入是将掺杂物（如硼、磷）引入到衬底中，以改变其电导性能。这个过程用于制造 P 型和 N 型半导体区域。
+            </p>
+            <ul>
+                <li>选择掺杂剂：硼（B）用于 P 型半导体，磷（P）用于 N 型半导体。</li>
+                <li>注入剂量和能量：注入的掺杂剂量和能量控制深度和浓度。</li>
+            </ul>
+            <img src="images\PN.png" alt="PN结的建模示意图" class="intro-image">
+        </section>
+
+        <!-- 步骤 3：退火处理 -->
+        <section class="intro-section">
+            <h2>03 退火处理</h2>
+            <p>
+                离子注入后的半导体材料通常需要进行退火处理，用以修复损伤并扩散掺杂物。
+            </p>
+            <ul>
+                <li>修复损伤：离子注入会造成晶格损伤，退火修复损伤。</li>
+                <li>扩散掺杂物：通过退火扩散掺杂物至衬底中，形成稳定的 P 型和 N 型区域。</li>
+            </ul>
+        </section>
+
+        <!-- 步骤 4：建立电极并施加电压 -->
+        <section class="intro-section">
+            <h2>04 建立电极并施加电压</h2>
+            <p>
+                完成材料的掺杂和退火处理后，建立电极并施加电压以进行 I-V 曲线扫描。
+            </p>
+            <ul>
+                <li>添加电极：通常在衬底的两个侧面分别添加阳极和阴极。</li>
+                <li>施加电压：对电极施加不同的正向或反向电压，记录电流变化。</li>
+            </ul>
+            <img src="images\PN.png" alt="PN结的建模示意图" class="intro-image">
+        </section>
+
+        <!-- 步骤 5：扫描 I-V 曲线 -->
+        <section class="intro-section">
+            <h2>05 扫描 I-V 曲线</h2>
+            <p>
+                施加电压扫描，记录电流与电压的关系，得到 I-V 曲线。
+            </p>
+            <ul>
+                <li>正向扫描：施加从零开始逐渐增大的正向电压。</li>
+                <li>反向扫描：施加反向电压，直到达到击穿电压。</li>
+            </ul>
+        </section>
+
+        <!-- 步骤 6：提取线性部分 -->
+        <section class="intro-section">
+            <h2>06 提取线性部分</h2>
+            <p>
+                从 I-V 曲线中提取线性部分，分析二极管方程与实验数据的符合程度。
+            </p>
+            <ul>
+                <li>提取线性部分：根据正向扫描得到的线性部分，计算理想因子和饱和电流。</li>
+            </ul>
+        </section>
+
+        <!-- 步骤 7：保存仿真数据与结果 -->
+        <section class="intro-section">
+            <h2>07 保存仿真数据与结果</h2>
+            <p>
+                完成 I-V 曲线扫描和提取后，保存仿真数据，用于进一步分析和对比。
+            </p>
+            <ul>
+                <li>导出数据：可以将数据导出为 `.dat` 或 `.csv` 格式。</li>
+                <li>保存模型参数：包括掺杂浓度、电压扫描范围等。</li>
+                <li>数学建模：通过图表应用分析实际参数与数学公式的精度和拟合情况</li>
+            </ul>
+            <p>
+                p.s.详细分析见“I-V曲线参数分析”子网页
+            </p>
+        </section>
+
+        <!-- 网站功能概览 -->
+        <section class="intro-section">
+            <h2>08 网站导航</h2>
+            <p>
+                点击对应模块进入对应子网页！
+            </p>
+            <div class="intro-grid">
+                <div class="intro-card" onclick="window.location.href='index.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro.html';" title="点击查看实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>TCAD 模型过程展示</h3>
+                    <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='ivCurve.html';" title="点击查看 I-V 曲线参数">
+                    <h3>I-V 曲线参数</h3>
+                    <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='network.html';" title="点击查看网络搭建思路">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
