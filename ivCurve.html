@@ -20,34 +20,16 @@
         <p>通过对 I-V 曲线的数学分析和实际实验建模，探讨不同参数对材料性能的影响。我们将展示理论曲线与实际建模曲线之间的关系，以便理解如何优化半导体材料的性能。</p>
     </div>
 
-    <!-- 图表部分 -->
-    <div class="chart-container">
-        <h2>I-V 曲线拟合</h2>
-        <canvas id="ivCurveChart" width="900" height="500"></canvas>
+
+
+    <div class="interactive-card" onclick="window.open('https://icdiodeproject-8yjao2iuqffgfzgrr8ohnx.streamlit.app/', '_blank')">
+        <div class="card-icon">⚡</div>
+        <div class="card-content">
+            <h3>实时交互仿真</h3>
+            <p>调节温度、饱和电流、理想因子<br>立即看到 I-V 曲线变化（对数坐标 + 线性坐标）</p>
+            <span class="card-btn">立即体验 →</span>
+        </div>
     </div>
-
-    <section class="intro-section">
-
-    <div class="button-container">
-        <button class="small-button" id="mathCurveBtn">数学上的理论曲线</button>
-        <button class="small-button" id="realCurveBtn">实际建模得到的曲线</button>
-        <button class="small-button" id="resetBtn">重置曲线</button> <!-- 新增重置按钮 -->
-    </div>
-    
-    <div class="search-pure">
-        <input 
-            type="number" 
-            id="voltageInput" 
-            placeholder="输入电压值（0~5V），按回车查询" 
-            min="0" 
-            max="5" 
-            step="0.01"
-            autocomplete="off">
-    </div>
-
-    </section>
-
-
 
 
   <main class="intro-content">
