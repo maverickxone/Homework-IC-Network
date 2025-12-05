@@ -285,81 +285,6 @@ button:active {
     color: #333;
 }
 
-.chart-container {
-    text-align: center;
-    margin-top: 40px;
-}
-
-#ivCurveChart {
-    width: 80%;  
-    height: 300px; 
-    margin: 10px auto;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-    gap: 16px;           
-    margin-top: -14px;      
-    flex-wrap: wrap;      
-}
-
-.button-container button,
-.small-button,
-button {         
-    padding: 6px 16px !important;  
-    font-size: 0.95rem !important;  
-    height: auto !important;
-    min-height: unset !important;
-    border-radius: 8px !important;
-    background: #f0a24a !important;
-    color: white !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
-}
-
-.button-container button:hover,
-.small-button:hover {
-    background: #e09134 !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-}
-
-.button-container button:active,
-.small-button:active {
-    transform: translateY(0) !important;
-}
-
-.search-pure {
-    display: flex;
-    justify-content: center;
-    margin: 14px auto;
-    padding: 0 20px;
-}
-
-#voltageInput {
-    width: 320px;
-    max-width: 90%;
-    padding: 7px 24px;
-    font-size: 0.9rem;
-    text-align: center;
-    border: 3px solid #e2e8f0;
-    border-radius: 50px;
-    outline: none;
-    background: white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-}
-
-#voltageInput:focus {
-    border-color: #f0a24a;
-    box-shadow: 0 0 0 6px rgba(240,162,74,0.2);
-    transform: scale(1.02);
-}
-
 /* 靠左对齐的 GitHub 卡片 */
 .github-card-left {
     width: 340px;
@@ -448,4 +373,66 @@ button {
 .github-card-left:hover .github-content h3 {
     color: #2a7448 !important;  
 
+}
+
+.interactive-card {
+    width: 420px;
+    height: 160px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 15px 35px rgba(102,86,248,0.3);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 60px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.interactive-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.interactive-card:hover::before {
+    transform: translateX(100%);
+}
+
+.interactive-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(102,86,248,0.4);
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    opacity: 0.9;
+}
+
+.card-content h3 {
+    font-size: 1.6rem;
+    margin: 0 0 12px 0;
+    font-weight: 700;
+}
+
+.card-content p {
+    margin: 0 0 16px 0;
+    opacity: 0.9;
+    line-height: 1.5;
+    font-size: 1.05rem;
+}
+
+.card-btn {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
 }
