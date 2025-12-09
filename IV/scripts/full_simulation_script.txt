@@ -1,0 +1,75 @@
+第一部分脚本：
+go athena
+
+#dimension definition
+line x loc=0.0 spacing=0.1
+line x loc=0.1 spacing=0.1
+line y loc=0 spacing=0.02
+line y loc=2.0 spacing=0.20
+
+#initialize the mesh
+init silicon c.phos=1.0e14 two.d
+
+#perform uniform boron implant
+implant boron dose=1e15 energy=70
+
+#perform diffusion
+diffuse time=30 temperature=1000
+
+#extract the junction depth
+extract name="xj" xj silicon mat.occno=1 x.val=0.0 junc.occno=1
+
+#save the structure
+structure outfile=pnjunction.str
+
+#plot the final profile
+tonyplot pnjunction.str
+
+
+
+
+第二部分脚本：
+go atlas
+#structure import
+init infile=pnjunction.str
+
+#electrode definition
+electrode name=anode top
+electrode name=cathode bottom
+
+#physical model configuration
+models  cvt srh auger bgn fermi print
+
+#simulation initialization and data recording
+solve init
+log outfile=Diode_IV.log
+
+#forward bias voltage sweep
+solve vanode=0.0
+solve vanode=0.05
+solve vanode=0.1
+solve vanode=0.15
+solve vanode=0.2
+solve vanode=0.25
+solve vanode=0.3
+solve vanode=0.35
+solve vanode=0.4
+solve vanode=0.45
+solve vanode=0.5
+solve vanode=0.55
+solve vanode=0.6
+solve vanode=0.65
+solve vanode=0.7
+solve vanode=0.75
+solve vanode=0.8
+solve vanode=0.85
+solve vanode=0.9
+solve vanode=0.95
+solve vanode=1.0
+
+log close
+
+#plot the final profile
+tonyplot Diode_IV.log
+
+quit
