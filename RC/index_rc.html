@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集成电路大作业（RC曲线动态交互）</title>
+    <link rel="stylesheet" href="style_rc.css">
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li {
+            display: inline;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        .breadcrumb li::after {
+            content: ">";
+            margin: 0 5px;
+            color: #ccc;
+        }
+
+        .breadcrumb li:last-child::after {
+            content: "";
+        }
+
+        
+    </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+    <ul>
+        <li><a href="../index.html">首页</a></li>
+        <li>RC 模块</li>
+    </ul>
+</nav>
+
+<header>
+    <div>
+        <h1>RC曲线动态交互分析</h1>
+        <p>这是关于 RC 曲线动态交互的实验介绍，下面会展示实验设计、过程和模型。</p>
+    </div>
+    <!-- 确保图片路径正确 -->
+    <img src="images\page.png" alt="PN结的建模示意图" />
+</header>
+
+    <!-- 第一部分：实验介绍 -->
+    <section class="section" id="section1">
+        <h2>实验总体介绍</h2>
+        <p>这里介绍了实验的总体目标、背景和目的。</p>
+        <img src="images\s.png" alt="PN结的建模示意图" />
+        <button id="introButton">查看更多</button>
+    </section>
+
+    <!-- 第二部分：RC Waveform 模型过程 -->
+    <section class="section" id="section2">
+        <h2>RC Waveform 模型过程展示</h2>
+        <p>展示了 RC Waveform 模型的搭建过程和相关细节。</p>
+        <img src="images\1.png" alt="PN结的建模示意图" />
+        <button id="rcWaveformButton">查看更多</button>
+    </section>
+
+    <!-- 第三部分：网站搭建思路 -->
+    <section class="section" id="section3">
+        <h2>网站搭建思路</h2>
+        <p>介绍了实验数据的收集和网站搭建过程。</p>
+        <img src="images\code.png" alt="PN结的建模示意图" />
+        <button id="networkButton">查看更多</button>
+    </section>
+
+    <!-- 总结与致谢卡片 -->
+    <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+        <h3>总结与致谢</h3>
+        <p>查看本项目的总结与致谢内容。</p>
+    </div>
+
+    <script src="script_rc.js"></script>
+</body>
+</html>

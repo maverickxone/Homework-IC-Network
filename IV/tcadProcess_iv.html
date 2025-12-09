@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TCAD仿真流程展示 - 集成电路大作业</title>
+    <link rel="stylesheet" href="style_iv.css" />
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>TCAD仿真流程展示</h1>
+        <p>
+            本页面展示了从选择衬底，离子注入，退火，施加电压到最终得到 I-V 曲线的完整建模过程。
+        </p>
+    </header>
+
+    <!-- 面包屑导航 -->
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="../index_iv.html">首页</a></li>
+            <li><a href="index_iv.html">IV 模块</a></li>
+            <li>TCAD 模型过程</li>
+        </ul>
+    </nav>
+
+    <main class="intro-content">
+
+        <h1 class="big-title">一、启动Athena工艺仿真模块</h1>
+
+        <section class="intro-section">
+            <h2>01 网格定义（Mesh）</h2>
+            <p>
+                我们首先在 TCAD Athena 工艺仿真模块 中启动仿真，通过定义网格与材料，为后续工艺步骤建立几何基础。<br>
+                每个节点都会存储对应位置的材料类型、掺杂浓度、电势等数据，是仿真器进行后续物理计算的数据锚点。
+            </p>
+
+            <div class="code-box">
+                <pre><code>
+    line x loc=0.0 spacing=0.1      
+    line x loc=0.1 spacing=0.1      
+    line y loc=0 spacing=0.02       
+    line y loc=2.0 spacing=0.20     
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>02 初始化衬底，离子注入（掺杂）</h2>
+            <p>
+                先设置衬底材料为硅（Si），并设置初始掺杂磷离子的浓度，再用磷（P）掺杂形成 N 型硅衬底，作为整个 PN 结的基础材料。<br>
+                接着，掺杂过程硼离子进入硅晶格，形成浓度梯度，为退火扩散做准备。
+            </p>
+            
+            <div class="code-box">
+                <pre><code>
+    init silicon c.phos=1.0e14 two.d          
+    implant boron dose=1e15 energy=70       
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 退火热扩散</h2>
+            <p>
+                执行 diffuse(扩散)命令进行热扩散，在1000℃温度下处理30分钟，使注入的硼杂质在硅衬底中进行热迁移，实现杂质的均匀分布与结深调控。
+            </p>
+            
+            <div class="code-box">
+                <pre><code>
+    diffuse time=30 temperature=1000          
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>04 PN结结深提取</h2>
+            <p>
+                结深：指P型和N型掺杂区域的交界面到半导体表面的垂直距离<br>
+                通过 extract（提取）命令提取PN结的结深（此处变量名为 xj ）
+            </p>
+            <div class="code-box">
+                <pre><code>
+    extract name="xj" xj silicon mat.occno=1 x.val=0.0 junc.occno=1     
+    mat.occno: 材料区域编号
+    x.val: x轴坐标，表示在x=0的截面上进行提取
+    junc.occno: 结区编号                
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>05 导出结构文件并使结构可视化</h2>
+            <p>
+                将当前工艺结构导出为 pnjunction.str文件，文件包含包含几何形状、掺杂分布的工艺结构数据。<br>
+                执行 tonyplot 命令调用可视化工具，加载 pnjunction.str 文件，实现工艺结构的图形化展示<br>
+                <br>下图为构建的PN结结构示意图：
+            </p>
+            
+        <img src="images/PN_knot.png" alt="示例图片" class="custom-img">
+
+        </section>
+
+        <h1 class="big-title">二、启动Atlas器件仿真模块</h1>
+
+        <section class="intro-section">
+            <h2>01 导入之前的结构文件</h2>
+            <p>
+                执行init infile命令导入pnjunction.str文件，将Athena生成的PN结模型加载至Atlas仿真环境。
+            </p>
+            <div class="code-box">
+                <pre><code>
+    init infile="pnjunction.str"          
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>02 定义电极</h2>
+            <p>
+                通过electrode命令定义器件电极，在结构顶部定义阳极，底部定义阴极，为电学特性仿真提供偏压施加端口。（此处以正偏为例）
+            </p>
+            <div class="code-box">
+                <pre><code>
+    electrode name=anode top
+    electrode name=cathode bottom      
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 物理模型配置</h2>
+            <p>
+                执行models命令启用核心物理模型，包括载流子温度模型（cvt）、Shockley-Read-Hall复合（srh）、
+                俄歇复合（auger）、带隙变窄（bgn）、费米统计（fermi），并开启模型参数打印（print），为器件电学行为计算提供物理依据。
+            </p>
+            <div class="code-box">
+                <pre><code>
+    models  cvt srh auger bgn fermi print   
+                </code></pre>
+            </div>
+
+        </section>
+
+        <section class="intro-section">
+            <h2>04 初始化并记录数据</h2>
+            <p>
+                执行solve init命令完成器件的初始稳态求解，将器件置于零偏压的平衡状态。<br>
+                执行log outfile命令指定仿真数据输出文件为Diode_IV.log，用于存储后续偏压扫描过程中的电学特性数据。
+            </p>
+        </section>
+
+        <section class="intro-section">
+            <h2>05 偏压扫描（以正偏为例）</h2>
+            <p>
+                执行一系列solve vanode命令，将阳极电压从0.0V逐步增加至1.0V（步长0.05V），
+                依次求解各偏压下的器件电学特性，获取PN结的正向IV曲线数据。然后关闭日志。
+            </p>
+            <div class="code-box">
+                <pre><code>
+    solve vanode=0.0        
+    solve vanode=0.05
+    solve vanode=0.1
+    ……
+    solve vanode=1.0
+    log close
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <p>正偏扫描得到的IV曲线图：</p>
+
+            <img src="images/IV_front.png" alt="示例图片" class="custom-img">
+            
+            <p>反偏扫描得到的IV曲线图：</p>
+            <img src="images/IV_backwards.png" alt="示例图片" class="custom-img">
+        </section>
+
+        <section class="intro-section">
+            <h2>06 导出仿真数据并可视化</h2>
+            <p>
+                执行tonyplot命令调用可视化工具，加载Diode_IV.log文件，实现IV曲线的图形化展示。
+            </p>
+        </section>
+
+        <h1 class="big-title">三、用到的物理模型解释</h1>
+        <section class="intro-section">
+            <h2>01 cvt（Carrier Temperature Model）</h2>
+            <p>
+                载流子温度模型，用于模拟载流子（电子、空穴）的温度变化（区别于晶格温度），适用于大电流、高电场等场景（如功率器件），能更精准地描述载流子的输运特性。
+            </p>
+
+            <h2>02 srh（Shockley-Read-Hall）</h2>
+            <p>
+                Shockley-Read-Hall复合模型，描述非平衡载流子通过复合中心的复合/产生过程，是多数常规器件（如PN结、MOS管）的基础复合模型，决定了器件的漏电流、开关速度等特性。
+            </p>
+
+            <h2>03 auger（Auger）</h2>
+            <p>
+                俄歇复合模型，描述载流子之间的碰撞复合过程（如电子-空穴-电子的碰撞），通常在高掺杂区域或大注入条件下起主导作用，会影响器件的饱和电流、击穿特性。
+            </p>
+
+            <h2>04 bgn（Band Gap Narrowing）</h2>
+            <p>
+                带隙变窄模型，描述高掺杂导致半导体带隙减小的现象，高掺杂区域（如PN结的重掺杂区）必须启用该模型，否则会导致IV曲线、阈值电压等仿真结果与实际偏差较大。
+            </p>
+
+            <h2>05 fermi（Fermi Statistics）</h2>
+            <p>
+                费米统计模型，启用后载流子浓度的计算会遵循费米-狄拉克分布（而非低掺杂下的玻尔兹曼近似），适用于重掺杂区域（载流子简并化的场景），能更准确地描述高掺杂下的载流子浓度。
+            </p>
+
+        </section>
+
+        <h1 class="big-title">四、对仿真模型的反思</h1>
+        <section class="intro-section">
+            <h2>01 模型优点</h2>
+            <ul>
+                <li>流程规范，覆盖了“网格定义→材料初始化→掺杂→扩散→结构提取→电极设置→器件仿真→IV扫描”的完整PN结仿真流程。</li>
+                <li>经过反复调试，在Tonyplot中成功生成了可视化的模型示意图和IV曲线图。</li>
+                <li>搭建的模型具有通用性，能够通过调整各种参数（如掺杂浓度、扩散时间的温度等），生成多组数据进行比对和拟合。</li>
+            </ul>
+
+            <h2>02 模型缺点</h2>
+            <ul>
+                <li>在仿真领域经验不足，得出的IV曲线图以及数据无法精准地契合理想状态。不过误差部分也为我们提供了很好的学习材料，我们通过查取资料，对其进行了很好的解释。</li>
+                <li>物理知识储备较少，对多种物理模型的应用可能存在不足之处。</li>
+                <li>初次撰写脚本，可能在部分地方稍有冗杂之处，如电压扫描部分等。</li>
+            </ul>
+        </section>
+
+
+
+        <section class="intro-section">
+            <h2>注释：</h2>
+            <p>为了达到更好的拟合效果，我们先后对模型的参数进行了多次修改，如网格的疏密、硼离子的掺杂浓度、退火的温度和时间、使用的物理模型、
+                电压扫描的区间和步长等等，产生了多组文件和数据。这里挑选较为原始的一版作为示例，其余版本因结构类似、本质相同而不再赘述。</p>
+            <p>点击下方按钮下载完整的仿真脚本文件。</p>
+            <a href="scripts/full_simulation_script.txt" download="full_simulation_script.txt" class="download-button">下载脚本</a>
+        </section>
+
+        <section class="intro-section">
+            <h2>网站导航</h2>
+            <p>
+                点击对应模块进入对应子网页！
+            </p>
+            <div class="intro-grid">
+                <div class="intro-card" onclick="window.location.href='index_iv.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro_iv.html';" title="点击查看实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>TCAD 模型过程展示</h3>
+                    <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='ivCurve_iv.html';" title="点击查看 I-V 曲线参数">
+                    <h3>I-V 曲线参数</h3>
+                    <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='network_iv.html';" title="点击查看网络搭建思路">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script_iv.js"></script>
+</body>
+
+</html>

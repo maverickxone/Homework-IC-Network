@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        RC实验总体介绍 - 集成电路大作业</title>
+    <link rel="stylesheet" href="style_rc.css" />
+</head>
+
+<body>
+
+    <!-- 面包屑导航 -->
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="index_rc.html">RC 模块</a></li>
+            <li>实验介绍</li>
+        </ul>
+    </nav>
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li {
+            display: inline;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        .breadcrumb li::after {
+            content: ">";
+            margin: 0 5px;
+            color: #ccc;
+        }
+
+        .breadcrumb li:last-child::after {
+            content: "";
+        }
+    </style>
+
+    <header class="intro-header">
+        <h1>RC 低通滤波器实验总体介绍</h1>
+        <p>本页面用于展示本次 RC 低通滤波器实验的背景、整体流程与网站功能结构。</p>
+    </header>
+
+
+    <main class="intro-content">
+        <section class="intro-section">
+            <h2>01 实验背景</h2>
+            <p>
+                RC（电阻–电容）网络是模拟电路中最基础、最常见的动态单元，被广泛用于滤波、
+                延时、电源管理等场景。在一个简单的 RC 低通滤波器中，电容电压会随时间呈指数形式变化，
+                这种“缓变”特性反映了系统对输入信号的平滑能力。
+                <br><br>
+                本实验旨在通过可视化方式展示 RC 电路的充电与放电过程，
+                理解时间常数 <span style="font-weight:600;">τ = RC</span> 对波形变化的决定作用，
+                并通过前端动态曲线帮助学习者直观认识低通滤波器的工作原理与动态行为。
+            </p>
+        </section>
+
+        <section class="intro-section">
+            <h2>02 核心思路与流程</h2>
+            <p>
+                本实验通过构建理论模型、生成动态响应曲线并实现网页交互展示，
+                让用户能够直观观察 RC 电路在不同参数下的响应速度与滤波效果。
+                整体流程如下：
+            </p>
+
+            <ul>
+                <li>建立 RC 低通滤波模型
+                    <ol>
+                        <li>采用标准的串联电阻 R 与电容 C 结构</li>
+                        <li>对阶跃输入信号进行响应模拟</li>
+                        <li>依据公式构建充电与放电的指数模型</li>
+                        <li>研究时间常数 τ = RC 对上升、下降沿速度的影响</li>
+                    </ol>
+                </li>
+
+                <li>生成不同参数条件下的理论动态波形
+                    <ol>
+                        <li>改变 R 或 C，观察时间常数变化引起的波形差异</li>
+                        <li>展示滤波器对快速变化信号的“平滑”作用</li>
+                        <li>以坐标曲线形式可视化不同参数对应的电容电压随时间变化曲线</li>
+                    </ol>
+                </li>
+
+                <li>构建网页交互系统
+                    <ol>
+                        <li>通过 JavaScript 与 Chart.js 动态绘制响应曲线</li>
+                        <li>支持多参数对比，让用户直观感受 RC 动态响应特性</li>
+                        <li>支持输入电压并计算对应稳态结果，用于辅助理解 RC 电路行为</li>
+                    </ol>
+                </li>
+
+                <li>最终以可视化与交互方式呈现 RC 电路的核心特性，辅助课程理解</li>
+            </ul>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 下载学术报告</h2>
+            <p>点击下方链接下载本实验的学术报告简要说明。</p>
+            <a href="rc_waveform.pdf" class="download-link" download>点击下载学术报告</a>
+            <style>
+            .download-link {
+            color: #007bff;
+            text-decoration: underline;
+            font-size: 16px;
+            transition: color 0.3s;
+            }
+
+            .download-link:hover {
+            color: #0056b3;
+            }
+            </style>
+        </section>
+
+        <section class="intro-section">
+            <h2>04 网站整体功能概览</h2>
+            <p>
+                本网站由五个主要模块组成，分别展示完整的实验内容与成果。<br>
+                点击对应模块进入对应子网页！
+            </p>
+            <div class="intro-grid">
+                <!-- 在功能卡片的开头添加首页按钮 -->
+                <div class="intro-card" onclick="window.location.href='index_rc.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='rc_waveform.html';"
+                    title="点击查看 RC Waveform 模型过程展示">
+                    <h3>RC Waveform 模型过程展示</h3>
+                    <p>展示 RC Waveform 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='network_rc.html';" title="点击查看网络搭建思路">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="script_rc.js"></script>
+</body>
+
+</html>

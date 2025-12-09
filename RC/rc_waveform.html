@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC 电路输入输出波形</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .controls {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .controls label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .controls input[type="range"] {
+            width: 300px;
+        }
+
+        #chart {
+            width: 90%;
+            max-width: 800px;
+            height: 500px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li {
+            display: inline;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        .breadcrumb li::after {
+            content: ">";
+            margin: 0 5px;
+            color: #ccc;
+        }
+
+        .breadcrumb li:last-child::after {
+            content: "";
+        }
+
+        .intro-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 300px;
+            text-align: center;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .intro-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .intro-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .big {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 70px 20px 20px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="index_rc.html">RC 模块</a></li>
+            <li>RC Waveform</li>
+        </ul>
+    </nav>
+    <h1 class="big">RC 电路输入输出波形及 Lissajous 图形</h1>
+    <h4>（点击上方导航栏的按钮返回RC模块首页）</h4>
+    <div class="controls">
+        <label>频率 f (Hz): <input id="freq-slider" type="range" min="0" max="100" step="1" value="7"></label>
+        <p>频率 f 决定了输入信号的变化速度。增大频率会使输入信号变化更快，从而影响输出信号的相位差和幅值。</p>
+        <label>电阻 R (kΩ): <input id="res-slider" type="range" min="0.01" max="10" step="0.01" value="1.66"></label>
+        <p>电阻 R 决定了电路的阻尼特性。增大电阻会减小输出信号的幅值，同时改变相位差。</p>
+        <label>电容 C (μF): <input id="cap-slider" type="range" min="1" max="40000" step="1" value="20000"></label>
+        <p>电容 C 决定了电路的储能能力。增大电容会使输出信号的变化更加平滑，同时影响相位差。</p>
+        <button id="reset-btn">重置</button>
+    </div>
+    <div id="chart"></div>
+    <p style="font-size: 1.2em; line-height: 0.1;">左侧图表显示输入电压 V_in 和输出电压 V_out 随时间的变化关系。右侧图表为 Lissajous 图形，展示了输入电压与输出电压之间的相位关系。</p>
+    <p style="font-size: 1.2em; line-height: 1.4;">通过调整频率 f、电阻 R 和电容 C，可以观察到电路的动态响应如何变化。这些参数的变化会影响信号的幅值、相位差以及波形形状。</p>
+
+    <script>
+        function calculate_w(f) {
+            return f === 0 ? 1e-6 : 2 * Math.PI * f;
+        }
+
+        function calculate_H(w, R, C) {
+            const RC = R * C * 1e-6;
+            return 1 / Math.sqrt(1 + Math.pow(w * RC, 2));
+        }
+
+        function calculate_phi(w, R, C) {
+            const RC = R * C * 1e-6;
+            return Math.atan(w * RC);
+        }
+
+        function V_in(x, w) {
+            return x.map(t => Math.cos(w * t));
+        }
+
+        function V_out(x, w, R, C) {
+            const H = calculate_H(w, R, C);
+            const phi = calculate_phi(w, R, C);
+            return x.map(t => H * Math.cos(w * t - phi));
+        }
+
+        function get_time_axis(f) {
+            if (f <= 0) return Array.from({ length: 5000 }, (_, i) => i / 5000);
+            const T = 1 / f;
+            const t_max = Math.min(Math.max(5 * T, 0.1), 10);
+            return Array.from({ length: 5000 }, (_, i) => i * t_max / 5000);
+        }
+
+        function updateChart(f, R, C) {
+            const x = get_time_axis(f);
+            const w = calculate_w(f);
+            const y_in = V_in(x, w);
+            const y_out = V_out(x, w, R, C);
+
+            const trace1 = {
+                x: x,
+                y: y_in,
+                mode: "lines",
+                name: "V_in(x)",
+                line: { color: "blue" },
+                xaxis: "x",
+                yaxis: "y"
+            };
+
+            const trace2 = {
+                x: x,
+                y: y_out,
+                mode: "lines",
+                name: "V_out(x)",
+                line: { color: "red" },
+                xaxis: "x",
+                yaxis: "y"
+            };
+
+            // ---- Lissajous 图（右侧）----
+            const trace3 = {
+                x: y_in,
+                y: y_out,
+                mode: "lines",
+                name: "Lissajous",
+                line: { color: "green" },
+                xaxis: "x2",
+                yaxis: "y2"
+            };
+
+            Plotly.newPlot("chart", [trace1, trace2, trace3], {
+                grid: { rows: 1, columns: 2, pattern: "independent" },
+                // 左图坐标轴
+                xaxis: { title: "时间 (s)" },
+                yaxis: { title: "电压 V(t)" },
+
+                // 右图坐标轴
+                xaxis2: { title: "V_in (V)" },
+                yaxis2: { title: "V_out (V)" },
+            });
+        }
+
+
+        document.getElementById('freq-slider').addEventListener('input', () => {
+            const f = parseFloat(document.getElementById('freq-slider').value);
+            const R = parseFloat(document.getElementById('res-slider').value);
+            const C = parseFloat(document.getElementById('cap-slider').value);
+            updateChart(f, R, C);
+        });
+
+        document.getElementById('res-slider').addEventListener('input', () => {
+            const f = parseFloat(document.getElementById('freq-slider').value);
+            const R = parseFloat(document.getElementById('res-slider').value);
+            const C = parseFloat(document.getElementById('cap-slider').value);
+            updateChart(f, R, C);
+        });
+
+        document.getElementById('cap-slider').addEventListener('input', () => {
+            const f = parseFloat(document.getElementById('freq-slider').value);
+            const R = parseFloat(document.getElementById('res-slider').value);
+            const C = parseFloat(document.getElementById('cap-slider').value);
+            updateChart(f, R, C);
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            document.getElementById('freq-slider').value = 7;
+            document.getElementById('res-slider').value = 1.66;
+            document.getElementById('cap-slider').value = 20000;
+            updateChart(7, 1.66, 20000);
+        });
+
+        // 初始化图表
+        updateChart(7, 1.66, 20000);
+    </script>
+</body>
+
+</html>

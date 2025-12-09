@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I-V 曲线分析</title>
+    <link rel="stylesheet" href="style_iv.css" />
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>I-V 曲线分析</h1>
+        <p>
+            在此部分，我们将展示 I-V 曲线的数学理论和实际建模结果的对比，帮助分析材料的电学特性。
+        </p>
+    </header>
+
+    <main class="intro-content">
+
+        <h1 class="big-title">一、借助Mathematica进行数学建模和拟合</h1>
+
+        <section class="intro-section">
+            <h2>01 数据分析</h2>
+            <p>
+                根据仿真模型产生的数据，我们用Mathematica软件进行了理想曲线参数的计算与拟合，先是选取了所有数据，得到如下结果：
+            </p>
+
+            <img src="images/data_1.png" alt="数据图片" class="custom-img">
+
+            <p>
+                <ul>
+                <li>从图像里，我们发现拟合效果不错，并且参数相对合理（n在1~2之间，Is的数量级在-16~-13之间）。<br></li>
+
+                <li>但是图像上大于0.7V部分出现了明显的偏移,通过查阅资料，我们发现理想曲线的适用范围一般在
+                正偏电压0.1V到0.7V之间（反偏电压小于0.1V，并且在图像表示上不明显，此处不用于后续拟合），
+                电压过大（超过0.7V）会导致串联电阻效应、大注入效应和自热效应等现象，使I-V曲线斜率变缓。<br></li>
+                
+                <li>为取得更好的拟合效果，我们选择0.4V到0.7V的数据进行拟合。</li>
+                </ul>
+
+                <br>
+                下面是一张建模过程的截图：
+            </p>
+
+            <img src="images/data_2.png" alt="数据图片" class="custom-img">
+
+            <p>
+                最终得到的拟合结果如下图所示：
+            </p>
+            <img src="images/data_3.png" alt="数据图片" class="custom-img">
+
+            <p>
+                拟合效果相当完美，但是参数计算的结果似乎偏离有些严重，我们再次查阅资料，检查模型，
+                发现出现n偏大的原因是建立仿真模型时P注入剂量偏高，在高温扩散后带隙变窄，俄歇复合增强，
+                导致复合电流成为主导，使n值变大。此外，仿真模型中开启了cvt、auger和bgn模型，
+                引入了实际效应，使得得到的结果更接近与实际结果（n接近2但小于2），而非理想结果。
+            </p>
+
+            <p>
+                我们再选取了0.3V至0.5V的数据尝试拟合：
+            </p>
+            <img src="images/data_4.png" alt="数据图片" class="custom-img">
+            
+            <p>
+                这次的结果更接近于理想状态，可见电压增大对pn结I-V属性的影响。<br>
+                总而言之，我们建立的仿真模型更加接近于真实情况，并且符合题目要求，最终能够成功地理想曲线拟合，
+                并且得到参数的估值。
+            </p>
+
+            <p>
+                最终得到的拟合结果如下图所示：
+            </p>
+            <img src="images/data_5.png" alt="数据图片" class="custom-img">
+
+            
+        </section>
+        
+        <h1 class="big-title">二、TCAD仿真得到的I-V曲线展示</h1>
+    </main>
+
+    <div class="interactive-card"
+        onclick="window.open('https://icdiodeproject-8yjao2iuqffgfzgrr8ohnx.streamlit.app/', '_blank')">
+        <div class="card-icon">⚡</div>
+        <div class="card-content">
+            <h3>实时交互仿真</h3>
+            <p>
+                调节温度、饱和电流、理想因子<br>
+                立即看到 I-V 曲线变化（对数坐标 + 线性坐标）
+            </p>
+            <span class="card-btn">立即体验 →</span>
+        </div>
+    </div>
+
+
+    <main class="intro-content">
+        <!-- 网站功能概览 -->
+        <section class="intro-section">
+            <h2>网站导航</h2>
+            <p>点击对应模块进入对应子网页！</p>
+
+            <div class="intro-grid">
+                <div class="intro-card" onclick="window.location.href='index_iv.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro_iv.html';" title="点击查看 实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='tcadProcess_iv.html';" title="点击查看 TCAD 模型过程展示">
+                    <h3>TCAD 模型过程展示</h3>
+                    <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>I-V 曲线参数</h3>
+                    <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='network_iv.html';" title="点击查看网络搭建思路">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="index.html">IV 模块</a></li>
+            <li>I-V 曲线</li>
+        </ul>
+    </nav>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script_iv.js"></script>
+</body>
+
+</html>

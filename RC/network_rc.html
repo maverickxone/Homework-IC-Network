@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网站搭建相关</title>
+    <link rel="stylesheet" href="style_rc.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>网站搭建相关介绍</h1>
+        <p>本页面用于展示本次实验的网站搭建思路，结构和前端处理</p>
+    </header>
+
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="index_rc.html">RC 模块</a></li>
+            <li>网站搭建思路</li>
+        </ul>
+    </nav>
+
+    <main class="intro-content">
+        <section class="intro-section">
+            <h2>01 基本建设</h2>
+            <ul>
+                <li>网站前端使用HTML,CSS和JavaScript开发，通过Live Server插件在VSCode中进行本地预览和调试。</li>
+                <li>HTML部分构建网站基本框架，CSS负责各式样式设计，最终JavaScript实现具体的交互，跳转功能。</li>
+                <li>在“RC 电路输入输出波形”子页面，我们使用 Plotly.js 绘制图形，实现交互式的 RC 电路输入输出波形和 Lissajous 图形，
+                    且可通过滑块动态调整频率、电阻和电容的参数，并实时更新图表，通过 JavaScript 计算 RC 电路的响应。</li>
+            </ul>
+        </section>
+
+        <section class="intro-section">
+            <h2>02 核心思路与流程</h2>
+            <p>
+                本网站采用纯前端开发的方式，所有内容均通过 HTML、CSS 和 JavaScript 实现，无需后端支持。
+            </p>
+            <ul>
+                <li>网站的所有文件（HTML、CSS、JavaScript、图片等）均存储在 GitHub 仓库中，通过 GitHub Pages 进行静态托管。</li>
+                <li>用户访问网站时，浏览器直接从 GitHub Pages 加载静态文件，无需服务器动态处理。</li>
+                <li>IV 和 RC 两个模块分别展示了不同的实验内容，IV 模块展现 TCAD 仿真流程，RC 模块展示了 RC 电路的分析与仿真。</li>
+                <li>通过模块化的文件结构（如独立的 CSS 和 JavaScript 文件），实现了代码的复用性和可维护性。</li>
+                <li>整个网站的导航清晰，用户可以通过面包屑导航和功能卡片快速跳转到不同模块。</li>
+            </ul>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 Source Code</h2>
+            <ul>
+                <li>本网站的所有前端文件及代码均可在我的Github账号上找到</li>
+            </ul>
+            <div class="github-card-left" onclick="window.open('https://github.com/maverickxone', '_blank')">
+                <div class="github-icon-top">
+                     <i class="fab fa-github"></i>
+                </div>
+                <div class="github-content">
+                    <h3>Maverickxone的 GitHub</h3>
+                    <p>查看本项目完整源代码</p>
+                    <p>欢迎 Star & Follow</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 功能概览 -->
+        <section class="intro-section">
+           <h2>04 网站导航</h2>
+            <p>
+                点击第一个按钮返回总网站首页。<br>
+                或者点击页面上方的导航栏快速返回首页！
+            </p>
+            <div class="intro-grid">
+                <div class="intro-card" onclick="window.location.href='../index.html';" title="返回总网站首页">
+                    <h3>总网站首页</h3>
+                    <p>跳转到总网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='index_rc.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回RC子网站的首页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro_rc.html';" title="点击查看 实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='rc_waveform.html';" title="点击查看 RC Waveform 模型过程展示">
+                    <h3>RC Waveform 模型过程展示</h3>
+                    <p>展示 RC Waveform 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="script_rc.js"></script>
+
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li {
+            display: inline;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        .breadcrumb li::after {
+            content: ">";
+            margin: 0 5px;
+            color: #ccc;
+        }
+
+        .breadcrumb li:last-child::after {
+            content: "";
+        }
+    </style>
+</body>
+</html>

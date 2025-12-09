@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网站搭建相关</title>
+    <link rel="stylesheet" href="style_iv.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .breadcrumb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="intro-header">
+        <h1>网站搭建相关介绍</h1>
+        <p>本页面用于展示本次实验的网站搭建思路，结构和前端处理</p>
+    </header>
+
+
+    <main class="intro-content">
+        <section class="intro-section">
+            <h2>01 基本建设</h2>
+            <ul>
+                <li>网站前端使用HTML,CSS和JavaScript开发，通过Live Server插件在VSCode中进行本地预览和调试。</li>
+                <li>HTML部分构建网站基本框架，CSS负责各式样式设计，最终JavaScript实现具体的交互，跳转功能。</li>
+                <li>在“I-V 曲线分析”子页面，我们引入了外部streamlit链接模拟进行动态交互。</li>
+            </ul>
+        </section>
+
+        
+        <section class="intro-section">
+            <h2>02 核心思路与流程</h2>
+            <p>
+                本网站采用纯前端开发的方式，所有内容均通过 HTML、CSS 和 JavaScript 实现，无需后端支持。
+            </p>
+            <ul>
+                <li>网站的所有文件（HTML、CSS、JavaScript、图片等）均存储在 GitHub 仓库中，通过 GitHub Pages 进行静态托管。</li>
+                <li>用户访问网站时，浏览器直接从 GitHub Pages 加载静态文件，无需服务器动态处理。</li>
+                <li>IV 和 RC 两个模块分别展示了不同的实验内容，IV 模块展现 TCAD 仿真流程，RC 模块展示了 RC 电路的分析与仿真。</li>
+                <li>通过模块化的文件结构（如独立的 CSS 和 JavaScript 文件），实现了代码的复用性和可维护性。</li>
+                <li>整个网站的导航清晰，用户可以通过面包屑导航和功能卡片快速跳转到不同模块。</li>
+            </ul>
+        </section>
+
+        <section class="intro-section">
+            <h2>03 Source Code</h2>
+            <ul>
+                <li>本网站的所有前端文件及代码均可在我的Github账号上找到</li>
+            </ul>
+            <div class="github-card-left" onclick="window.open('https://github.com/maverickxone', '_blank')">
+                <div class="github-icon-top">
+                     <i class="fab fa-github"></i>
+                </div>
+                <div class="github-content">
+                    <h3>Maverickxone的 GitHub</h3>
+                    <p>查看本项目完整源代码</p>
+                    <p>欢迎 Star & Follow</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 功能概览 -->
+        <section class="intro-section">
+            <h2>04 网站导航</h2>
+            <p>
+                点击第一个按钮返回总网站首页。<br>
+                或者点击页面上方的导航栏快速返回首页！
+            </p>
+            <div class="intro-grid">
+                <div class="intro-card" onclick="window.location.href='../index.html';" title="返回总网站首页">
+                    <h3>总网站首页</h3>
+                    <p>跳转到总网站的首页。</p>
+                </div>
+                <div class="intro-card" onclick="window.location.href='index_iv.html';" title="返回IV子网站主页">
+                    <h3>IV子网站主页</h3>
+                    <p>返回IV子网站的主页。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='intro_iv.html';" title="点击查看 实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='tcadProcess_iv.html';" title="点击查看 TCAD 模型过程展示">
+                    <h3>TCAD 模型过程展示</h3>
+                    <p>展示 TCAD 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='ivCurve_iv.html';" title="点击查看 I-V 曲线参数">
+                    <h3>I-V 曲线参数</h3>
+                    <p>交互式查看 I-V 曲线在不同参数下的变化。</p>
+                </div>
+
+                <div class="intro-card disabled" title="当前页面（不可点击）">
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 面包屑导航 -->
+        <nav class="breadcrumb">
+            <ul>
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html">IV 模块</a></li>
+                <li>网站搭建思路</li>
+            </ul>
+        </nav>
+
+    </main>
+
+    <script src="script_iv.js"></script>
+</body>
+</html>

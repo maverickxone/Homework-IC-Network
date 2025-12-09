@@ -1,54 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>集成电路大作业</title>
-    <link rel="stylesheet" href="style.css">
+    <title>集成电路项目 - 总体介绍</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #87CEEB, white, #eec474); /* 左边蓝色渐变到中间白色，中间白色渐变到右边橙色 */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-card {
+            background-color: #fff; /* 保持卡片为白色背景 */
+            background: none; /* 移除与背景相同的渐变 */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            width: 300px; /* 增大卡片宽度 */
+            height: 200px; /* 增大卡片高度 */
+        }
+
+        .nav-card::before {
+            display: none; /* 删除卡片中央的静态光晕 */
+        }
+
+        .nav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-card h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .nav-card p {
+            margin: 10px 0 0;
+            font-size: 1em;
+            color: #555;
+        }
+    </style>
 </head>
+
 <body>
+    <header>
+        <h1>集成电路项目 - 总体介绍</h1>
+        <p>欢迎来到集成电路项目的主页，选择以下模块进入详细内容。</p>
+    </header>
 
-<header>
-    <div>
-        <h1>集成电路大作业</h1>
-        <p>这是关于 PN 结的 I-V 曲线建模和拟合的实验介绍，下面会展示实验设计、过程和模型。</p>
+    <div class="navigation">
+        <div class="nav-card" onclick="window.location.href='IV/index_iv.html';">
+            <h3>IV 模块</h3>
+            <p>探索 IV 模块的详细内容。</p>
+        </div>
+
+        <div class="nav-card" onclick="window.location.href='RC/index_rc.html';">
+            <h3>RC 模块</h3>
+            <p>探索 RC 模块的详细内容。</p>
+        </div>
     </div>
-    <img src="images\PN.png" alt="PN结的建模示意图" />
-</header>
 
+    <script>
+        document.querySelectorAll('.nav-card').forEach(card => {
+            card.addEventListener('mouseenter', e => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 200, 0, 0.6), transparent 30%)`; /* 加深绿色并提高透明度 */
+                });
+            });
 
-    <section class="section" id="section1">
-        <h2>实验总体介绍</h2>
-        <p>这里介绍了实验的总体目标、背景和目的。</p>
-        <img src="images\PN.png" alt="PN结的建模示意图" />
-        <button id="introButton">查看更多</button>
-    </section>
-
-
-    <section class="section" id="section2">
-        <h2>TCAD 模型过程展示</h2>
-        <p>展示了 TCAD 模型的搭建过程和相关细节。</p>
-        <img src="images\PN.png" alt="PN结的建模示意图" />
-        <button id="tcadButton">查看更多</button>
-    </section>
-
-
-    <section class="section" id="section3">
-        <h2>I-V 曲线示意图</h2>
-        <p>展示了 I-V 曲线的不同参数如何影响实验结果，以及数学曲线的拟合和实际建模的差别</p>
-        <img src="images\PN.png" alt="PN结的建模示意图" />
-        <button id="ivCurveButton">查看更多</button>
-    </section>
-
-
-    <section class="section" id="section4">
-        <h2>网站搭建思路</h2>
-        <p>介绍了实验数据的收集和网站搭建过程。</p>
-        <img src="images\PN.png" alt="PN结的建模示意图" />
-        <button id="networkButton">查看更多</button>
-    </section>
-
-    <script src="script.js"></script>
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
-
