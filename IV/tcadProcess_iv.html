@@ -43,8 +43,8 @@
         <section class="intro-section">
             <h2>01 网格定义（Mesh）</h2>
             <p>
-                我们首先在 TCAD Athena 工艺仿真模块 中启动仿真，通过定义网格与材料，为后续工艺步骤建立几何基础。<br>
-                每个节点都会存储对应位置的材料类型、掺杂浓度、电势等数据，是仿真器进行后续物理计算的数据锚点。
+                通过定义x,y方向的网格节点分布，为后续结构建模提供几何网络基础。<br>
+                （每个节点都会存储对应位置的材料类型、掺杂浓度、电势等数据，是仿真器进行物理计算的数据锚点）
             </p>
 
             <div class="code-box">
@@ -52,7 +52,7 @@
     line x loc=0.0 spacing=0.1      
     line x loc=0.1 spacing=0.1      
     line y loc=0 spacing=0.02       
-    line y loc=2.0 spacing=0.20     
+    line y loc=2.0 spacing=0.20  （默认单位为微米）   
                 </code></pre>
             </div>
         </section>
@@ -60,8 +60,8 @@
         <section class="intro-section">
             <h2>02 初始化衬底，离子注入（掺杂）</h2>
             <p>
-                先设置衬底材料为硅（Si），并设置初始掺杂磷离子的浓度，再用磷（P）掺杂形成 N 型硅衬底，作为整个 PN 结的基础材料。<br>
-                接着，掺杂过程硼离子进入硅晶格，形成浓度梯度，为退火扩散做准备。
+                设置衬底，并设置初始掺杂磷离子的浓度，以构成n型衬底<br>
+                再用implant（注入）命令注入剂量为1×10¹⁵ cm⁻²，注入能量为70keV，在N型衬底表面形成P型掺杂区域
             </p>
             
             <div class="code-box">
@@ -181,19 +181,19 @@
         </section>
 
         <section class="intro-section">
+            <h2>06 导出仿真数据并可视化</h2>
+            <p>
+                执行tonyplot命令调用可视化工具，加载Diode_IV.log文件，实现IV曲线的图形化展示。
+            </p>
+        </section>
+
+        <section class="intro-section">
             <p>正偏扫描得到的IV曲线图：</p>
 
             <img src="images/IV_front.png" alt="示例图片" class="custom-img">
             
             <p>反偏扫描得到的IV曲线图：</p>
             <img src="images/IV_backwards.png" alt="示例图片" class="custom-img">
-        </section>
-
-        <section class="intro-section">
-            <h2>06 导出仿真数据并可视化</h2>
-            <p>
-                执行tonyplot命令调用可视化工具，加载Diode_IV.log文件，实现IV曲线的图形化展示。
-            </p>
         </section>
 
         <h1 class="big-title">三、用到的物理模型解释</h1>
