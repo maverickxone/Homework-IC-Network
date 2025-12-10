@@ -1,4 +1,36 @@
-const introButton = document.getElementById("introButton");
+// ===== 页面加载完成后执行 =====
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ===== 卡片点击事件 =====
+    const cardLinks = {
+        'card1': 'intro_iv.html',          // 实验总体介绍
+        'card2': 'tcadProcess_iv.html',    // TCAD 模型过程
+        'card3': 'ivCurve_iv.html',        // I-V 曲线
+        'card4': 'network_iv.html'         // 网站搭建思路
+    };
+
+    // 为每个卡片添加点击事件
+    Object.keys(cardLinks).forEach(cardId => {
+        const card = document.getElementById(cardId);
+        if (card) {
+            card.addEventListener('click', function() {
+                window.location.href = cardLinks[cardId];
+            });
+        }
+    });
+
+    // 底部卡片（总结与致谢）点击事件
+    const lastWordsCard = document.getElementById('lastWordsCard');
+    if (lastWordsCard) {
+        lastWordsCard.addEventListener('click', function() {
+            window.location.href = '../last_words.html';
+        });
+    }
+
+});
+
+// ===== 旧代码备份（如需使用请解注） =====
+// const introButton = document.getElementById("introButton");
 const ivCurveButton = document.getElementById("ivCurveButton");
 const networkButton = document.getElementById("networkButton");
 const tcadButton = document.getElementById("tcadButton");

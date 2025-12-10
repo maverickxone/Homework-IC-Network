@@ -1,35 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>集成电路大作业（I-V曲线扫描）</title>
     <link rel="stylesheet" href="style_iv.css">
-    <style>
-        .breadcrumb {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
-
-<header>
-    <div>
-        <h1>PN结的I-V曲线扫描</h1>
-        <p>这是关于 PN 结的 I-V 曲线建模和拟合的实验介绍，下面会展示实验设计、过程和模型。</p>
-    </div>
-    <img src="images/cover.jpg" alt="示例图片" class="custom-img" style="filter: invert(0);">
-</header>
 
 <!-- 面包屑导航 -->
 <nav class="breadcrumb">
@@ -39,44 +16,89 @@
     </ul>
 </nav>
 
-    <!-- 第一部分：实验介绍 -->
-    <section class="section" id="section1">
-        <h2>实验总体介绍</h2>
-        <p>这里介绍了实验的总体目标、背景和目的。</p>
-        <img src="images/data_1.png" alt="PN结的建模示意图" />
-        <button id="introButton">查看更多</button>
+<!-- 主容器 -->
+<main class="main-container">
+
+    <!-- 顶部标题区域 -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">集成电路大作业</h1>
+            <p class="hero-subtitle">PN 结的 I-V 曲线扫描 - 通过 TCAD 仿真和数学建模，深入理解半导体器件的电气特性。</p>
+        </div>
     </section>
 
-    <!-- 第二部分：TCAD 模型过程 -->
-    <section class="section" id="section2">
-        <h2>TCAD 模型过程展示</h2>
-        <p>展示了 TCAD 模型的搭建过程和相关细节。</p>
-        <img src="images/IV_front.png" alt="PN结的建模示意图" />
-        <button id="tcadButton">查看更多</button>
+    <!-- 卡片网格区域 -->
+    <section class="cards-container">
+        <div class="cards-grid">
+            
+            <!-- 卡片 1: 实验介绍 -->
+            <div class="course-card" id="card1">
+                <div class="card-image">
+                    <img src="images/data_1.png" alt="实验总体介绍" />
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">实验总体介绍</h3>
+                    <p class="card-description">这里介绍了实验的总体目标、背景和目的。</p>
+                    <div class="card-footer">
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 2: TCAD 模型过程 -->
+            <div class="course-card" id="card2">
+                <div class="card-image">
+                    <img src="images/IV_front.png" alt="TCAD 模型过程展示" />
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">TCAD 模型过程展示</h3>
+                    <p class="card-description">展示了 TCAD 模型的搭建过程和相关细节。</p>
+                    <div class="card-footer">
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 3: I-V 曲线 -->
+            <div class="course-card" id="card3">
+                <div class="card-image">
+                    <img src="images/data_5.png" alt="I-V 曲线示意图" />
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">I-V 曲线示意图</h3>
+                    <p class="card-description">展示了 I-V 曲线的不同参数如何影响实验结果，以及数学曲线的拟合和实际建模的差别。</p>
+                    <div class="card-footer">
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 4: 网站搭建思路 -->
+            <div class="course-card" id="card4">
+                <div class="card-image">
+                    <img src="images/coding.png" alt="网站搭建思路" />
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">网站搭建思路</h3>
+                    <p class="card-description">介绍了实验数据的收集和网站搭建过程。</p>
+                    <div class="card-footer">
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
 
-    <!-- 第三部分：I-V 曲线 -->
-    <section class="section" id="section3">
-        <h2>I-V 曲线示意图</h2>
-        <p>展示了 I-V 曲线的不同参数如何影响实验结果，以及数学曲线的拟合和实际建模的差别</p>
-        <img src="images/data_5.png" alt="PN结的建模示意图" />
-        <button id="ivCurveButton">查看更多</button>
+    <!-- 总结与致谢 -->
+    <section class="footer-divider-section">
+        <div class="footer-divider" id="lastWordsDivider">
+            <a href="../last_words.html" class="footer-link">总结与致谢</a>
+        </div>
     </section>
 
-    <!-- 第四部分：网站搭建思路 -->
-    <section class="section" id="section4">
-        <h2>网站搭建思路</h2>
-        <p>介绍了实验数据的收集和网站搭建过程。</p>
-        <img src="images/coding.png" alt="PN结的建模示意图" />
-        <button id="networkButton">查看更多</button>
-    </section>
+</main>
 
-    <!-- 总结与致谢 卡片 -->
-    <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
-        <h3>总结与致谢</h3>
-        <p>查看本项目的总结与致谢内容。</p>
-    </div>
-
-    <script src="script_iv.js"></script>
+<script src="script_iv.js"></script>
 </body>
 </html>
