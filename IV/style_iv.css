@@ -7,52 +7,99 @@ body {
     min-height: 100vh;
 }
 
-/* 面包屑导航样式 */
 .breadcrumb {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #fff;
-    padding: 12px 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    font-size: 14px;
+
+    /* 近乎纯白 + 轻微磨砂 */
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+    padding: 10px 32px;
+    font-size: 13px;
+    color: #64748b;
 }
 
+/* 内部布局：居中对齐、可自动换行 */
 .breadcrumb ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 10px;
-    max-width: 1200px;
     margin: 0 auto;
+    max-width: 1200px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    white-space: nowrap;
 }
 
 .breadcrumb li {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
 }
 
+/* 普通链接样式 */
 .breadcrumb a {
     text-decoration: none;
-    color: #007bff;
-    transition: color 0.2s;
+    color: #396ce3;
+    padding: 2px 6px;
+    border-radius: 999px;
+    transition: 
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
 }
 
+/* hover：轻微底色 + 不夸张上浮 */
 .breadcrumb a:hover {
-    color: #0056b3;
+    background-color: rgba(39, 86, 198, 0.04);
+    color: #020617;
+    transform: translateY(-0.5px);
+}
+
+/* 现代极简箭头 ›（CSS 绘制），完美垂直居中 */
+.breadcrumb li {
+    display: inline-flex;
+    align-items: center; /* 保持所有元素基线一致 */
 }
 
 .breadcrumb li::after {
-    content: ">";
-    margin: 0 5px;
-    color: #ccc;
+    content: "";
+    width: 6px;
+    height: 6px;
+
+    /* 这里用 border 画斜箭头，像 › 的极简风格 */
+    border-right: 2px solid #025bc8;
+    border-bottom: 2px solid #025bc8;
+
+    transform: rotate(-45deg) translateY(1px); 
+    /* translateY 是关键 → 微调基线，使箭头与中文完全对齐 */
+
+    margin: 0 10px;
+    opacity: 0.9;
 }
 
 .breadcrumb li:last-child::after {
     content: "";
 }
+
+/* 当前项 */
+.breadcrumb li.current,
+.breadcrumb li:last-child {
+    font-weight: 500;
+    color: #000000;
+}
+
+.breadcrumb li.current a {
+    pointer-events: none;
+    cursor: default;
+}
+
 
 /* 主容器 */
 .main-container {
@@ -74,7 +121,7 @@ body {
 
 .hero-title {
     font-size: 3.2em;
-    font-weight: 800;
+    font-weight: 700;
     color: #1a1a1a;
     margin: 0 0 20px 0;
     line-height: 1.2;
@@ -184,6 +231,35 @@ body {
 .course-card:hover .card-arrow {
     color: #0056b3;
     transform: translateX(4px);
+}
+
+/* Next label for course cards (left bottom) */
+.card-next {
+    color: #4c9ef6;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+/* Next label with arrow for intro cards */
+.intro-card .card-next {
+    position: absolute;
+    top: 13px;
+    right: 23px;
+    color: #007bff;
+    font-size: 1.25em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Space between arrow and text */
+}
+
+.intro-card .card-next::before {
+    content: '→';
+    font-size: 1.25em;
+    color: #007bff;
+    position: relative;
+    top: -2px; 
 }
 
 /* ===== 响应式布局 ===== */
@@ -439,6 +515,7 @@ button:active {
 .intro-card.disabled {
     cursor: not-allowed; 
     opacity: 1; 
+    pointer-events: auto; /* Ensure click events are not blocked */
 }
 
 .intro-card.disabled::after {
@@ -579,106 +656,58 @@ button:active {
 .interactive-card {
     width: 420px;
     height: 160px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
+    background: white; /* Changed to pure white */
+    color: black; /* Adjusted text color for contrast */
     border-radius: 20px;
     padding: 32px;
-    box-shadow: 0 15px 35px rgba(102,86,248,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for minimalistic look */
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 24px;
-    margin: -100px 100px 100px 100px;
+    margin: -100px 0px 100px 170px; /* Center the card horizontally */
     position: relative;
     overflow: hidden;
-}
-
-.interactive-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.interactive-card:hover::before {
-    transform: translateX(100%);
+    text-align: left; /* Center align text inside the card */
 }
 
 .interactive-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 25px 50px rgba(102,86,248,0.4);
-}
-
-.card-icon {
-    font-size: 3.5rem;
-    opacity: 0.9;
+    transform: translateY(-8px); /* Reduced hover effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Subtle hover shadow */
 }
 
 .card-content h3 {
-    font-size: 1.6rem;
-    margin: 0 0 12px 0;
-    font-weight: 700;
+    font-size: 1.3rem; /* Adjusted heading size */
+    margin-top: -10px;
+    margin-bottom: 16px; /* Increased spacing below heading */
 }
 
 .card-content p {
-    margin: 0 0 16px 0;
-    opacity: 0.9;
-    line-height: 1.5;
-    font-size: 1.05rem;
+    font-size: 1.0rem; /* Adjusted paragraph text size */
+    line-height: 1.8; /* Increased line spacing for better readability */
+    margin-bottom: 20px; /* Added spacing below paragraph */
+}
+
+.card-icon {
+    display: none; /* Removed emoji icon */
 }
 
 .card-btn {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    backdrop-filter: blur(10px);
+    background: black; /* Changed to black for contrast */
+    color: white; /* White text for readability */
+    padding: 10px 24px;
+    border-radius: 4px; /* Sharper corners for simplicity */
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase; /* Added uppercase for a clean look */
+    text-align: center;
+    transition: background 0.3s ease;
 }
 
-/* 面包屑导航样式 */
-.breadcrumb {
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        .breadcrumb li {
-            display: inline;
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: #0056b3;
-        }
-
-        .breadcrumb li::after {
-            content: ">";
-            margin: 0 5px;
-            color: #ccc;
-        }
-
-        .breadcrumb li:last-child::after {
-            content: "";
-        }
+.card-btn:hover {
+    background: gray; /* Slightly lighter hover effect */
+}
 
 /* 更新代码框样式为粗体和左对齐，自动调整大小 */
 .code-box {
@@ -746,7 +775,6 @@ button:active {
     border-radius: 8px; /* 添加圆角效果 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
 }
-
 
 .footer-divider-section {
     display: flex;

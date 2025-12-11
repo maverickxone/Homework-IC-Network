@@ -1,97 +1,10 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #fccb70, #ffffff); /* 上方橙色渐变为下方白色 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fae2ce 0%, #ffffff 100%);
     color: #333;
     margin: 0;
-    padding: 0，10px;
-    min-height: 100vh; 
-}
-
-header {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center; 
-    padding: 23vh 5% 23vh 5%;
-    z-index: 100;
-    gap: 80px; 
-    position: relative; 
-}
-
-header h1 {
-    font-size: 2.6em;
-    color: #333;
-    margin: 10px;
-}
-
-header p {
-    font-size: 16px;
-    color: #333;
-    flex-basis: 30%; 
-    margin: 10px;
-}
-
-header img {
-    width: 50%; 
-    object-fit: cover; 
-    height: auto; 
-    filter: brightness(0.9) contrast(1.2) saturate(1.1); 
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-    position: relative; 
-}
-
-.section {
-    padding: 60px 20px; 
-    opacity: 0;    
-    transform: translateY(40px);
-    transition: opacity 1.8s, transform 1.8s;
-    text-align: center;
-    background: linear-gradient(to bottom, #fccb70, #ffffff); /* 上方橙色渐变为下方白色 */
-    min-height: auto; 
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#section2{
-  background: linear-gradient(to bottom, #ffffff, #efcff3);
-}
-
-#section3{
-  background: linear-gradient(to bottom, #efcff3, #f099e9);
-}
-
-.section img {
-    width: 80%; 
-    max-width: 500px; 
-    margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 60px 5%; 
-        gap: 40px; 
-    }
-
-    header h1 {
-        font-size: 2.5em; 
-    }
-
-    header p {
-        font-size: 14px;
-        text-align: center;
-    }
-
-    header img {
-        width: 90%; 
-    }
-
-    .section {
-        padding: 40px 10px; 
-        min-height: auto; 
-    }
+    padding: 0;
+    min-height: 100vh;
 }
 
 button {
@@ -234,6 +147,7 @@ button:active {
 .intro-card.disabled {
     cursor: not-allowed; 
     opacity: 1; 
+    pointer-events: auto; /* Ensure click events are not blocked */
 }
 
 .intro-card.disabled::after {
@@ -431,4 +345,323 @@ button:active {
     border-radius: 30px;
     font-size: 0.95rem;
     backdrop-filter: blur(10px);
+}
+
+/* Main container */
+.main-container {
+    padding-top: 60px;
+    min-height: 100vh;
+}
+
+/* Hero section */
+.hero-section {
+    padding: 80px 40px 60px 40px;
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 3.2em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.2em;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 700px;
+    font-weight: 400;
+}
+
+/* Cards container */
+.cards-container {
+    padding: 60px 40px;
+    background: transparent;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Single card */
+.course-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e0f4f7 0%, #f0f9fb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.card-description {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 auto 0;
+    flex-grow: 1;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.card-arrow {
+    font-size: 1.5em;
+    color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.course-card:hover .card-arrow {
+    color: #0056b3;
+    transform: translateX(4px);
+}
+
+.course-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-divider-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.footer-divider {
+    display: flex;
+    align-items: center;
+    width: 100%;        /* ★ 必须加 */
+    max-width: 900px;   /* 可自由调 */
+}
+
+.footer-divider::before,
+.footer-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.35);
+}
+ 
+.footer-link {
+    margin: 0 16px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.footer-link:hover {
+    font-weight: 600;
+    transform: translateY(-2px);
+}
+
+
+.breadcrumb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    /* 近乎纯白 + 轻微磨砂 */
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+    padding: 10px 32px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* 内部布局：居中对齐、可自动换行 */
+.breadcrumb ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    white-space: nowrap;
+}
+
+.breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 普通链接样式 */
+.breadcrumb a {
+    text-decoration: none;
+    color: #396ce3;
+    padding: 2px 6px;
+    border-radius: 999px;
+    transition: 
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+/* hover：轻微底色 + 不夸张上浮 */
+.breadcrumb a:hover {
+    background-color: rgba(39, 86, 198, 0.04);
+    color: #020617;
+    transform: translateY(-0.5px);
+}
+
+/* 现代极简箭头 ›（CSS 绘制），完美垂直居中 */
+.breadcrumb li {
+    display: inline-flex;
+    align-items: center; /* 保持所有元素基线一致 */
+}
+
+.breadcrumb li::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+
+    /* 这里用 border 画斜箭头，像 › 的极简风格 */
+    border-right: 2px solid #025bc8;
+    border-bottom: 2px solid #025bc8;
+
+    transform: rotate(-45deg) translateY(1px); 
+    /* translateY 是关键 → 微调基线，使箭头与中文完全对齐 */
+
+    margin: 0 10px;
+    opacity: 0.9;
+}
+
+.breadcrumb li:last-child::after {
+    content: "";
+}
+
+/* 当前项 */
+.breadcrumb li.current,
+.breadcrumb li:last-child {
+    font-weight: 500;
+    color: #000000;
+}
+
+.breadcrumb li.current a {
+    pointer-events: none;
+    cursor: default;
+}
+
+
+.big {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 70px 20px 20px 20px;
+}
+
+.controls {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.controls label {
+    font-size: 16px;
+    color: #555;
+}
+
+.controls input[type="range"] {
+    width: 300px;
+}
+
+/* Next label for course cards (left bottom) */
+.card-next {
+    color: #4c9ef6;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+/* Next label with arrow for intro cards */
+.intro-card .card-next {
+    position: absolute;
+    top: 13px;
+    right: 23px;
+    color: #007bff;
+    font-size: 1.25em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Space between arrow and text */
+}
+
+.intro-card .card-next::before {
+    content: '→';
+    font-size: 1.25em;
+    color: #007bff;
+    position: relative;
+    top: -2px; 
 }

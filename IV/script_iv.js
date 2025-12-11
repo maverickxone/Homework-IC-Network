@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    const disabledCard = document.querySelector(".intro-card.disabled");
+    if (disabledCard) {
+        disabledCard.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            alert("Stop Trying!\n你已经处于该页面啦");
+        });
+    }
 });
 
 // ===== 旧代码备份（如需使用请解注） =====
@@ -61,14 +68,6 @@ window.addEventListener("scroll", function() {
         }
     });
 });
-
-const disabledCard = document.querySelector(".intro-card.disabled");
-if (disabledCard) {
-    disabledCard.addEventListener("click", function (event) {
-        event.preventDefault(); 
-        alert("Stop Trying!\n你已经处于该页面啦");
-    });
-}
 
 const ctx = document.getElementById('ivCurveChart').getContext('2d');
 

@@ -19,53 +19,6 @@
             <li>实验介绍</li>
         </ul>
     </nav>
-    <style>
-        .breadcrumb {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        .breadcrumb li {
-            display: inline;
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: #0056b3;
-        }
-
-        .breadcrumb li::after {
-            content: ">";
-            margin: 0 5px;
-            color: #ccc;
-        }
-
-        .breadcrumb li:last-child::after {
-            content: "";
-        }
-    </style>
 
     <header class="intro-header">
         <h1>RC 低通滤波器实验总体介绍</h1>
@@ -163,6 +116,7 @@
 
                 <div class="intro-card" onclick="window.location.href='rc_waveform.html';"
                     title="点击查看 RC Waveform 模型过程展示">
+                    <div class="card-next">Next</div>
                     <h3>RC Waveform 模型过程展示</h3>
                     <p>展示 RC Waveform 模型的搭建过程和相关细节。</p>
                 </div>

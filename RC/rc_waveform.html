@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RC 电路输入输出波形</title>
+    <link rel="stylesheet" href="style_rc.css" />
     <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
     <style>
         body {
@@ -60,52 +61,6 @@
             background-color: #0056b3;
         }
 
-        .breadcrumb {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        .breadcrumb li {
-            display: inline;
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: #0056b3;
-        }
-
-        .breadcrumb li::after {
-            content: ">";
-            margin: 0 5px;
-            color: #ccc;
-        }
-
-        .breadcrumb li:last-child::after {
-            content: "";
-        }
-
         .intro-card {
             background-color: #fff;
             border-radius: 8px;
@@ -115,7 +70,7 @@
             cursor: pointer;
             transition: transform 0.2s;
             width: 300px;
-            text-align: center;
+            text-align: left;
         }
 
         .intro-card:hover {
@@ -134,11 +89,6 @@
             color: #666;
         }
 
-        .big {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 70px 20px 20px 20px;
-        }
     </style>
 </head>
 
@@ -151,7 +101,6 @@
         </ul>
     </nav>
     <h1 class="big">RC 电路输入输出波形及 Lissajous 图形</h1>
-    <h4>（点击上方导航栏的按钮返回RC模块首页）</h4>
     <div class="controls">
         <label>频率 f (Hz): <input id="freq-slider" type="range" min="0" max="100" step="1" value="7"></label>
         <p>频率 f 决定了输入信号的变化速度。增大频率会使输入信号变化更快，从而影响输出信号的相位差和幅值。</p>
@@ -162,7 +111,8 @@
         <button id="reset-btn">重置</button>
     </div>
     <div id="chart"></div>
-    <p style="font-size: 1.2em; line-height: 0.1;">左侧图表显示输入电压 V_in 和输出电压 V_out 随时间的变化关系。右侧图表为 Lissajous 图形，展示了输入电压与输出电压之间的相位关系。</p>
+    <p style="font-size: 1.2em; line-height: 0.1;">左侧图表显示输入电压 V_in 和输出电压 V_out 随时间的变化关系。右侧图表为 Lissajous
+        图形，展示了输入电压与输出电压之间的相位关系。</p>
     <p style="font-size: 1.2em; line-height: 1.4;">通过调整频率 f、电阻 R 和电容 C，可以观察到电路的动态响应如何变化。这些参数的变化会影响信号的幅值、相位差以及波形形状。</p>
 
     <script>
@@ -278,6 +228,46 @@
         // 初始化图表
         updateChart(7, 1.66, 20000);
     </script>
+    <main class="intro-content">
+        <section class="intro-section">
+            <h2>04 网站整体功能概览</h2>
+            <p>
+                本网站由五个主要模块组成，分别展示完整的实验内容与成果。<br>
+                点击对应模块进入对应子网页！
+            </p>
+            <div class="intro-grid">
+                <!-- 在功能卡片的开头添加首页按钮 -->
+                <div class="intro-card" onclick="window.location.href='index_rc.html';" title="返回首页">
+                    <h3>首页</h3>
+                    <p>返回网站的首页。</p>
+                </div>
+
+                <div class="intro-card " title="点击查看 实验总体介绍">
+                    <h3>实验总体介绍</h3>
+                    <p>当前页面，提供背景、目标和总体流程说明。</p>
+                </div>
+
+                <div class="intro-card disabled" onclick="window.location.href='rc_waveform.html';" title="当前页面（不可点击）">
+                    
+                    <h3>RC Waveform 模型过程展示</h3>
+                    <p>展示 RC Waveform 模型的搭建过程和相关细节。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='network_rc.html';" title="点击查看网络搭建思路">
+                    <div class="card-next">Next</div>
+                    <h3>网络搭建思路</h3>
+                    <p>介绍了实验数据的收集和网站搭建过程。</p>
+                </div>
+
+                <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <h3>总结与致谢</h3>
+                    <p>查看本项目的总结与致谢内容。</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
 </body>
 
 </html>

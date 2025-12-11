@@ -6,15 +6,6 @@
     <title>网站搭建相关</title>
     <link rel="stylesheet" href="style_iv.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .breadcrumb {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-    </style>
 </head>
 
 <body>
@@ -29,9 +20,9 @@
         <section class="intro-section">
             <h2>01 基本建设</h2>
             <ul>
-                <li>网站前端使用HTML,CSS和JavaScript开发，通过Live Server插件在VSCode中进行本地预览和调试。</li>
-                <li>HTML部分构建网站基本框架，CSS负责各式样式设计，最终JavaScript实现具体的交互，跳转功能。</li>
-                <li>在“I-V 曲线分析”子页面，我们引入了外部streamlit链接模拟进行动态交互。</li>
+                <li>网站前端使用 HTML, CSS和 JavaScript 开发，通过 Live Server 插件在 VSCode 中进行本地预览和调试。</li>
+                <li> HTML 部分构建网站基本框架，CSS 负责各式样式设计，最终 JavaScript 实现具体的交互，跳转功能。</li>
+                <li>在“ I-V 曲线分析”子页面，我们引入了外部 streamlit 链接模拟进行动态交互。</li>
             </ul>
         </section>
 
@@ -77,6 +68,7 @@
             </p>
             <div class="intro-grid">
                 <div class="intro-card" onclick="window.location.href='../index.html';" title="返回总网站首页">
+                    <div class="card-next">Next</div>
                     <h3>总网站首页</h3>
                     <p>跳转到总网站的首页。</p>
                 </div>
@@ -116,7 +108,7 @@
         <nav class="breadcrumb">
             <ul>
                 <li><a href="../index.html">首页</a></li>
-                <li><a href="index.html">IV 模块</a></li>
+                <li><a href="index_iv.html">IV 模块</a></li>
                 <li>网站搭建思路</li>
             </ul>
         </nav>

@@ -10,11 +10,6 @@
 
 <body>
 
-    <header class="intro-header">
-        <h1>网站搭建相关介绍</h1>
-        <p>本页面用于展示本次实验的网站搭建思路，结构和前端处理</p>
-    </header>
-
     <nav class="breadcrumb">
         <ul>
             <li><a href="../index.html">首页</a></li>
@@ -22,6 +17,11 @@
             <li>网站搭建思路</li>
         </ul>
     </nav>
+
+    <header class="intro-header">
+        <h1>网站搭建相关介绍</h1>
+        <p>本页面用于展示本次实验的网站搭建思路，结构和前端处理</p>
+    </header>
 
     <main class="intro-content">
         <section class="intro-section">
@@ -100,6 +100,7 @@
                 </div>
 
                 <div class="intro-card" onclick="window.location.href='../last_words.html';" title="总结与致谢">
+                    <div class="card-next">Next</div>
                     <h3>总结与致谢</h3>
                     <p>查看本项目的总结与致谢内容。</p>
                 </div>
@@ -112,52 +113,5 @@
 
     <script src="script_rc.js"></script>
 
-    <style>
-        .breadcrumb {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        .breadcrumb li {
-            display: inline;
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: #0056b3;
-        }
-
-        .breadcrumb li::after {
-            content: ">";
-            margin: 0 5px;
-            color: #ccc;
-        }
-
-        .breadcrumb li:last-child::after {
-            content: "";
-        }
-    </style>
 </body>
 </html>
