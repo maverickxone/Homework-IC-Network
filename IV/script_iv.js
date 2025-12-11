@@ -179,7 +179,7 @@ document.getElementById('resetBtn').addEventListener('click', function () {
     });
     ivCurveChart.update();  
 });
-
+ 
 const voltageInput = document.getElementById('voltageInput');
 
 voltageInput.addEventListener('keydown', function(e) {
